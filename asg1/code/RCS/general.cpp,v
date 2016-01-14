@@ -1,0 +1,141 @@
+head	1.5;
+access;
+symbols;
+locks;
+comment	@// @;
+
+
+1.5
+date	2015.07.08.19.32.13;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2015.07.04.01.17.50;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2015.07.04.01.17.21;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2015.07.02.23.48.18;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2015.07.02.01.40.41;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.5
+log
+@-
+@
+text
+@// $Id: general.cpp,v 1.4 2015-07-03 18:17:50-07 - - $
+
+#include <cstring>
+using namespace std;
+
+#include "general.h"
+
+ydc_exn::ydc_exn (const string& what): runtime_error (what) {
+}
+
+string exec::execname_; // Must be initialized from main().
+int exec::status_ = EXIT_SUCCESS;
+
+void exec::execname (const string& argv0) {
+   execname_ = basename (argv0.c_str());
+   cout << boolalpha;
+   cerr << boolalpha;
+   DEBUGF ('Y', "execname = " << execname_);
+}
+
+void exec::status (int new_status) {
+   new_status &= 0xFF;
+   if (status_ < new_status) status_ = new_status;
+}
+
+ostream& note() {
+   return cerr << exec::execname() << ": ";
+}
+
+ostream& error() {
+   exec::status (EXIT_FAILURE);
+   return note();
+}
+
+@
+
+
+1.4
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: general.cpp,v 1.3 2015-07-03 18:17:21-07 - - $
+d21 5
+@
+
+
+1.3
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: general.cpp,v 1.2 2015-07-02 16:48:18-07 - - $
+d15 1
+a15 1
+   execname_ = basename (argv0);
+@
+
+
+1.2
+log
+@-
+@
+text
+@d1 4
+a4 1
+// $Id: general.cpp,v 1.1 2015-07-01 18:40:41-07 - - $
+d15 1
+a15 1
+   execname_ = argv0;
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: util.cpp,v 1.13 2015-07-01 13:24:32-07 - - $
+d8 2
+a9 2
+string sys_info::execname_; // Must be initialized from main().
+int sys_info::status_ = EXIT_SUCCESS;
+d11 1
+a11 1
+void sys_info::execname (const string& argv0) {
+d18 7
+a24 4
+ostream& complain() {
+   sys_info::status (EXIT_FAILURE);
+   cerr << sys_info::execname() << ": ";
+   return cerr;
+@
