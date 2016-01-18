@@ -4,6 +4,7 @@
 #include <exception>
 #include <stack>
 #include <stdexcept>
+#include <vector>
 using namespace std;
 
 #include "ubigint.h"
@@ -18,6 +19,9 @@ ubigint::ubigint (const string& that): uvalue(0) {
 }
 
 ubigint ubigint::operator+ (const ubigint& that) const {
+   //vector<int> thisVector;
+   //vector<int> thatVector;
+   
    return ubigint (uvalue + that.uvalue);
 }
 
@@ -38,7 +42,7 @@ void ubigint::divide_by_2() {
    uvalue /= 2;
 }
 
-
+
 ubigint::quot_rem ubigint::divide (const ubigint& that) const {
    static const ubigint zero = 0;
    if (that == zero) throw domain_error ("ubigint::divide: by 0");
@@ -78,6 +82,6 @@ bool ubigint::operator< (const ubigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const ubigint& that) { 
-   return out << "ubigint(" << that.uvalue << ")";
+   return out << that.uvalue;
 }
 

@@ -47,7 +47,7 @@ void do_clear (bigint_stack& stack, const char) {
    stack.clear();
 }
 
-
+
 void do_dup (bigint_stack& stack, const char) {
    bigint top = stack.top();
    DEBUGF ('d', top);

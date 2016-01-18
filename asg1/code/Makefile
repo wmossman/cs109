@@ -5,7 +5,7 @@ DEPFILE     = ${MKFILE}.dep
 NOINCL      = ci clean spotless
 NEEDINCL    = ${filter ${NOINCL}, ${MAKECMDGOALS}}
 GMAKE       = ${MAKE} --no-print-directory
-COMPILECPP  = g++ -std=gnu++11 -g -O0 -Wall -Wextra
+COMPILECPP  = g++ -std=gnu++11 -g -O0 -Wall -Wextra -DDEBUGF
 MAKEDEPCPP  = g++ -std=gnu++11 -MM
 
 MODULES     = bigint ubigint libfns scanner debug general
