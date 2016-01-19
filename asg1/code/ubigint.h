@@ -13,28 +13,31 @@ using namespace std;
 #include "relops.h"
 
 class ubigint {
-   friend ostream& operator<< (ostream&, const ubigint&);
-   private:
-      using quot_rem = pair<ubigint,ubigint>;
-      using unumber = unsigned long;
-      unumber uvalue {};
-      quot_rem divide (const ubigint&) const;
-      void multiply_by_2();
-      void divide_by_2();
-   public:
+	friend ostream& operator<< (ostream&, const ubigint&);
+	private:
+		using quot_rem = pair<ubigint,ubigint>;
+		using udigit_t = unsigned char;
+		using ubigvalue_t = vector<udigit_t>;
+		ubigvalue_t ubig_value;
+		quot_rem divide (const ubigint&) const;
+		void multiply_by_2();
+		void divide_by_2();
+	public:
 
-      ubigint() = default; // Need default ctor as well.
-      ubigint (unsigned long);
-      ubigint (const string&);
+		ubigint() = default; // Need default ctor as well.
+		ubigint (unsigned long);
+		ubigint (vector<unsigned char>);
+		ubigint (const string&);
 
-      ubigint operator+ (const ubigint&) const;
-      ubigint operator- (const ubigint&) const;
-      ubigint operator* (const ubigint&) const;
-      ubigint operator/ (const ubigint&) const;
-      ubigint operator% (const ubigint&) const;
+		ubigint operator+ (const ubigint&) const;
+		ubigint operator- (const ubigint&) const;
+		ubigint operator* (const ubigint&) const;
+		ubigint operator/ (const ubigint&) const;
+		ubigint operator% (const ubigint&) const;
 
-      bool operator== (const ubigint&) const;
-      bool operator<  (const ubigint&) const;
+		bool operator== (const ubigint&) const;
+		bool operator<  (const ubigint&) const;
+		
 };
 
 #endif

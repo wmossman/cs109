@@ -14,27 +14,28 @@ using namespace std;
 #include "ubigint.h"
 
 class bigint {
-   friend ostream& operator<< (ostream&, const bigint&);
-   private:
-      ubigint uvalue;
-      bool is_negative {false};
-   public:
+	friend ostream& operator<< (ostream&, const bigint&);
+	private:
+		ubigint uvalue;
+		bool is_negative {false};
+	public:
 
-      bigint() = default; // Needed or will be suppressed.
-      bigint (long);
-      bigint (const ubigint&, bool is_negative = false);
-      explicit bigint (const string&);
+		bigint() = default; // Needed or will be suppressed.
+		bigint (long);
+		bigint (const ubigint&, bool is_negative = false);
+		explicit bigint (const string&);
 
-      bigint operator+() const;
-      bigint operator-() const;
-      bigint operator+ (const bigint&) const;
-      bigint operator- (const bigint&) const;
-      bigint operator* (const bigint&) const;
-      bigint operator/ (const bigint&) const;
-      bigint operator% (const bigint&) const;
+		bigint operator+() const;
+		bigint operator-() const;
+		bigint operator+ (const bigint&) const;
+		bigint operator- (const bigint&) const;
+		bigint operator* (const bigint&) const;
+		bigint operator/ (const bigint&) const;
+		bigint operator% (const bigint&) const;
 
-      bool operator== (const bigint&) const;
-      bool operator<  (const bigint&) const;
+		bool operator== (const bigint&) const;
+		bool operator<  (const bigint&) const;
+		
 };
 
 #endif

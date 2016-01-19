@@ -21,6 +21,7 @@ bigint::bigint (const ubigint& uvalue, bool is_negative):
 bigint::bigint (const string& that) {
    is_negative = that.size() > 0 and that[0] == '_';
    uvalue = ubigint (that.substr (is_negative ? 1 : 0));
+   if(is_negative and that[1] == '0') is_negative = false; //for -0
 }
 
 bigint bigint::operator+() const {
