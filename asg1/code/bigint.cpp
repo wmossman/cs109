@@ -121,6 +121,7 @@ bigint bigint::operator* (const bigint& that) const {
 		result.is_negative = false;
 		result.uvalue = ubigint ("0");
 	}
+	
 	else if(uvalue == onevalue){
 		result.uvalue = that.uvalue;
 		result.is_negative = (is_negative != that.is_negative);
@@ -138,9 +139,17 @@ bigint bigint::operator* (const bigint& that) const {
 
 
 bigint bigint::operator/ (const bigint& that) const {
-   bigint result{};
-	result.uvalue = uvalue / that.uvalue;
-	result.is_negative = (is_negative != that.is_negative);
+	bigint result{};
+	ubigint zerovalue = ubigint ("0");
+	if(uvalue == zerovalue or uvalue<that.uvalue){
+		result.is_negative = false;
+		result.uvalue = ubigint ("0");
+	}
+	else{
+		result.uvalue = uvalue / that.uvalue;
+		result.is_negative = (is_negative != that.is_negative);
+	}
+	
    return result;
 }
 
