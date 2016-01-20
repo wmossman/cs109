@@ -1,9 +1,8 @@
 CMPS-109 · Winter 2016 · Program 1 · Overloading and operators  1 of 1
-$Id: asg2-dc-bigint.mm,v 1.81 2015-07-08 18:38:21-07 - - $
-PWD: /afs/cats.ucsc.edu/courses/cmps109-wm/Assignments/asg1-dc-
-bigint
-URL: http://www2.ucsc.edu/courses/cmps109-wm/:/Assignments/
-asg1-dc-bigint/
+$Id: asg2-dc-bigint.mm,v 1.82 2015-12-11 17:08:59-08 - - $
+PWD: /afs/cats.ucsc.edu/users/r/wmossman/private/cmps109/asg1
+URL: No URL for /afs/cats.ucsc.edu/users/r/wmossman/private/
+cmps109/asg1
 
 .EQ
 delim $$

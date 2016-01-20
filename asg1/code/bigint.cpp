@@ -115,8 +115,24 @@ bigint bigint::operator- (const bigint& that) const {
 
 bigint bigint::operator* (const bigint& that) const {
 	bigint result{};
-	result.uvalue = uvalue * that.uvalue;
-	result.is_negative = (is_negative != that.is_negative);
+	ubigint zerovalue = ubigint ("0");
+	ubigint onevalue = ubigint ("1");
+	if(uvalue == zerovalue || that.uvalue == zerovalue){
+		result.is_negative = false;
+		result.uvalue = ubigint ("0");
+	}
+	else if(uvalue == onevalue){
+		result.uvalue = that.uvalue;
+		result.is_negative = (is_negative != that.is_negative);
+	}
+	else if(that.uvalue == onevalue){
+		result.uvalue = uvalue;
+		result.is_negative = (is_negative != that.is_negative);
+	}
+	else{
+		result.uvalue = uvalue * that.uvalue;
+		result.is_negative = (is_negative != that.is_negative);
+	}
 	return result;
 }
 

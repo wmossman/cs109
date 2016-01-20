@@ -16,6 +16,7 @@ ubigint::ubigint (unsigned long that){
 		ubig_value.push_back(tempThat%10);
 		tempThat /= 10;
    }
+   
 }
 
 ubigint::ubigint (vector<unsigned char> that){
@@ -27,6 +28,8 @@ ubigint::ubigint (const string& that) {
 		rit!=that.rend(); ++rit){
 		ubig_value.push_back(*rit - '0');
 	}
+	while (ubig_value.size() > 0 and ubig_value.back() == 0) 
+		ubig_value.pop_back();
 }
 
 ubigint ubigint::operator+ (const ubigint& that) const {
@@ -133,21 +136,54 @@ ubigint ubigint::operator- (const ubigint& that) const {
 }
 
 ubigint ubigint::operator* (const ubigint& that) const {
-   return 0;
-   //return ubigint (uvalue * that.uvalue);
+	ubigint newUbigint = ubigint("0");
+	if(ubig_value.size() >= that.ubig_value.size()){
+		ubigint countUbigint = that;
+		while(countUbigint != ubigint("0")){
+			newUbigint = newUbigint + *this;
+			countUbigint = countUbigint - 1;
+		}
+	}
+	else{
+		ubigint countUbigint = *this;
+		while(countUbigint != ubigint("0")){
+			newUbigint = newUbigint + that;
+			countUbigint = countUbigint - 1;
+		}
+	}
+   
+   
+   return newUbigint;
 }
 
 void ubigint::multiply_by_2() {
-   //uvalue *= 2;
+	
+   *this = *this * 2;
 }
 
 void ubigint::divide_by_2() {
-   //uvalue /= 2;
+	ubigvalue_t newVector(ubig_value.size());
+	char carry = 0;
+	for(int i = ubig_value.size()-1; i>=0; --i){
+		if(ubig_value[i]  % 2 == 1){
+			newVector[i] = (ubig_value[i] / 2) + carry;
+			carry = 5;
+		}
+		else{
+			newVector[i] = (ubig_value[i] / 2) + carry;
+			carry = 0;
+		}
+	}
+	
+	while (newVector.size() > 0 and newVector.back() == 0) 
+		newVector.pop_back();
+	ubig_value = newVector;
+   
 }
 
 
 ubigint::quot_rem ubigint::divide (const ubigint& that) const {
-   /*static const ubigint zero = 0;
+   static const ubigint zero = ubigint("0");
    if (that == zero) throw domain_error ("ubigint::divide: by 0");
    ubigint power_of_2 = 1;
    ubigint divisor = that; // right operand, divisor
@@ -166,7 +202,7 @@ ubigint::quot_rem ubigint::divide (const ubigint& that) const {
       power_of_2.divide_by_2();
    }
    return {quotient, remainder};
-   */
+   
 }
 
 ubigint ubigint::operator/ (const ubigint& that) const {
@@ -207,6 +243,7 @@ ostream& operator<< (ostream& out, const ubigint& that) {
 		rit!=that.ubig_value.rend(); ++rit){
 		valstring.push_back(*rit + '0');
 	}
+	if(that.ubig_value.size()==0) valstring = '0';
     return out << valstring;
 }
 
